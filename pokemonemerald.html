@@ -1,407 +1,100 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Home - Classroom</title>
-  <link rel="icon" type="image/png" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAABsklEQVQYV6WPMY9MYRSGnzO5K5mrsczINCujkBh3ihU1CX9BMSsKtqTQ6mzDr5BFQiLRSkRoFRu7icIQ3YoCESHL3DEbmfMqzjc3d1BxmvPlS97nPK9J4n8mm75Yvsz00zkzYTYPkwypAbJ4e2xkyBuw0LpvPzfaMpURrgMUAIhgBZGBGgGznIzpGMx4OW7xatLGbBYGJJTecoHHu2h+pZ/vgP8gQ4YQw3GbB1+OQgIgkS80kYvR7igBHLkzaImi+Q1kZKEJuJB71WDvnpy1M1dBsPb0BqNJiWpGqSWN6GRJ05ELubiwvEJ33xLdxSVWT5xHVRclw8ilCoY89STwt7fu0V08BMD687thKM1biKhgM3CtwmhScu3xdSRR7pZVuPInDicDknoA+p0eRecY/U4PgOGH12y83WT783aAHDSrIBlAquBcOXmJ00dOUZ+i02Nw/CwPh4+4+exWfMqQjExuYIDC4vdwfQ7v786FEWSoAYiiucPgwDuGb9bnQlVloCw/stJ+T5F/j4MyrHxyUKCw+NsIIK4pbbAAy8gkWwUu2uzSDKT6+jMIINkdU93xH+YXTrImgXmBBtYAAAAASUVORK5CYII="/>
-  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Share+Tech+Mono&display=swap" rel="stylesheet"/>
-  <style>
-    :root {
-      --bg: #080b10;
-      --card: #111820;
-      --border: #1e2d3d;
-      --accent: #00e5ff;
-      --accent2: #ff3c6e;
-      --text: #c9d8e8;
-      --dim: #4a5a6a;
-      --glow: 0 0 18px rgba(0,229,255,0.35);
-    }
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    body {
-      background: var(--bg);
-      color: var(--text);
-      font-family: 'Share Tech Mono', monospace;
-      min-height: 100vh;
-      overflow-x: hidden;
-    }
-    body::before {
-      content: '';
-      position: fixed; inset: 0;
-      background-image:
-        linear-gradient(rgba(0,229,255,0.03) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(0,229,255,0.03) 1px, transparent 1px);
-      background-size: 40px 40px;
-      pointer-events: none; z-index: 0;
-    }
-    body::after {
-      content: '';
-      position: fixed; inset: 0;
-      background: repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0,0,0,0.08) 2px, rgba(0,0,0,0.08) 4px);
-      pointer-events: none; z-index: 0;
-    }
-    .wrap {
-      position: relative; z-index: 1;
-      max-width: 1100px;
-      margin: 0 auto;
-      padding: 40px 24px 80px;
-    }
-    header {
-      display: flex;
-      align-items: flex-end;
-      justify-content: space-between;
-      margin-bottom: 32px;
-      border-bottom: 1px solid var(--border);
-      padding-bottom: 24px;
-      flex-wrap: wrap; gap: 12px;
-    }
-    .logo {
-      font-family: 'Orbitron', sans-serif;
-      font-weight: 900;
-      font-size: clamp(22px, 4vw, 36px);
-      letter-spacing: 0.08em;
-      color: var(--accent);
-      text-shadow: var(--glow);
-      line-height: 1;
-    }
-    .logo span { color: var(--accent2); text-shadow: 0 0 18px rgba(255,60,110,0.4); }
-    .status {
-      font-size: 11px; color: var(--dim);
-      display: flex; align-items: center; gap: 8px;
-    }
-    .status::before {
-      content: '';
-      display: inline-block;
-      width: 7px; height: 7px;
-      background: #00ff88; border-radius: 50%;
-      box-shadow: 0 0 6px #00ff88;
-      animation: pulse 2s infinite;
-    }
-    @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.3} }
+<html>
+  <!-- Ultimate Game Stash file-->
+  <!-- For the regularly updating doc go to https://docs.google.com/document/d/1_FmH3BlSBQI7FGgAQL59-ZPe8eCxs35wel6JUyVaG8Q/ -->
 
-    /* ── Search + Filters ── */
-    .controls {
-      display: flex;
-      flex-direction: column;
-      gap: 14px;
-      margin-bottom: 28px;
-    }
-    .search-wrap { position: relative; }
-    .search-wrap::before {
-      content: '⌕';
-      position: absolute;
-      left: 14px; top: 50%;
-      transform: translateY(-50%);
-      color: var(--dim);
-      font-size: 18px;
-      pointer-events: none;
-    }
-    #searchInput {
-      width: 100%;
-      background: var(--card);
-      border: 1px solid var(--border);
-      border-radius: 6px;
-      color: var(--text);
-      font-family: 'Share Tech Mono', monospace;
-      font-size: 13px;
-      padding: 11px 16px 11px 40px;
-      outline: none;
-      transition: border-color 0.2s, box-shadow 0.2s;
-    }
-    #searchInput::placeholder { color: var(--dim); }
-    #searchInput:focus {
-      border-color: var(--accent);
-      box-shadow: 0 0 12px rgba(0,229,255,0.1);
-    }
-    .filter-row {
-      display: flex;
-      gap: 8px;
-      flex-wrap: wrap;
-      align-items: center;
-    }
-    .filter-label {
-      font-family: 'Orbitron', sans-serif;
-      font-size: 9px;
-      letter-spacing: 0.2em;
-      color: var(--dim);
-      margin-right: 4px;
-    }
-    .filter-btn {
-      background: var(--card);
-      border: 1px solid var(--border);
-      border-radius: 4px;
-      color: var(--dim);
-      font-family: 'Orbitron', sans-serif;
-      font-size: 9px;
-      letter-spacing: 0.12em;
-      font-weight: 700;
-      padding: 5px 12px;
-      cursor: pointer;
-      transition: all 0.15s;
-    }
-    .filter-btn:hover { border-color: var(--accent); color: var(--accent); }
-    .filter-btn.active { border-color: transparent; }
-    .filter-btn[data-tag="ALL"].active  { background: var(--accent);  color: #000; }
-    .filter-btn[data-tag="GBA"].active  { background: var(--accent2); color: #fff; border-color: var(--accent2); }
-    .filter-btn[data-tag="NES"].active  { background: #ffe500;        color: #000; border-color: #ffe500; }
-    .filter-btn[data-tag="SNES"].active { background: #a855f7;        color: #fff; border-color: #a855f7; }
-    .filter-btn[data-tag="GAME"].active { background: #00ff88;        color: #000; border-color: #00ff88; }
+  <head>
+    <script src="//www.google.com/jsapi"></script>
+    <script>
+      window.parent.maeExportApis_();
+    </script>
 
-    /* ── Section label ── */
-    .section-label {
-      font-family: 'Orbitron', sans-serif;
-      font-size: 11px; letter-spacing: 0.25em;
-      color: var(--dim); text-transform: uppercase;
-      margin-bottom: 20px;
-    }
-    .section-label::before { content: '// '; color: var(--accent); }
+    <style>
+      body {
+        overflow: hidden;
+        background: #000000;
+        margin-top: 0;
+        margin-left: 0;
+        color: #000000;
+      }
 
-    /* ── Grid ── */
-    .grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-      gap: 18px;
-    }
-    .game-card {
-      background: var(--card);
-      border: 1px solid var(--border);
-      border-radius: 6px;
-      overflow: hidden;
-      cursor: pointer;
-      transition: transform 0.2s, border-color 0.2s, box-shadow 0.2s;
-      position: relative;
-      display: flex; flex-direction: column;
-    }
-    .game-card:hover {
-      transform: translateY(-4px);
-      border-color: var(--accent);
-      box-shadow: 0 0 22px rgba(0,229,255,0.15), 0 8px 32px rgba(0,0,0,0.5);
-    }
-    .game-card:hover .card-thumb { opacity: 0.9; }
-    .game-card:hover .play-overlay { opacity: 1; }
-    .game-card.hidden { display: none; }
+      #startButton {
+        display: block;
+        width: 160px;
+        height: 40px;
+        background-color: #4caf50;
+        color: white;
+        text-align: center;
+        text-decoration: none;
+        font-size: 16px;
+        margin: 20px auto;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+        font-family: "Press Start 2P", cursive;
+        box-shadow: 0px 0px 10px 2px #000000;
+      }
+    </style>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Press+Start+2P&amp;display=swap"
+      rel="stylesheet"
+    />
+    <style type="text/css">
+      #button {
+        display: none;
+      }
 
-    .card-thumb {
-      height: 120px;
-      display: flex; align-items: center; justify-content: center;
-      font-size: 52px;
-      background: linear-gradient(135deg, #0a1520 0%, #0f1e2d 100%);
-      opacity: 0.75;
-      transition: opacity 0.2s;
-      position: relative;
-    }
-    .play-overlay {
-      position: absolute; inset: 0;
-      background: rgba(0,229,255,0.08);
-      display: flex; align-items: center; justify-content: center;
-      opacity: 0; transition: opacity 0.2s;
-    }
-    .play-icon {
-      width: 40px; height: 40px;
-      border-radius: 50%;
-      background: var(--accent);
-      display: flex; align-items: center; justify-content: center;
-      box-shadow: 0 0 20px rgba(0,229,255,0.6);
-    }
-    .play-icon::after {
-      content: '';
-      display: inline-block;
-      border: 0px solid transparent;
-      border-left: 14px solid #000;
-      border-top: 9px solid transparent;
-      border-bottom: 9px solid transparent;
-      margin-left: 4px;
-    }
-    .card-body {
-      padding: 14px 16px; flex: 1;
-      display: flex; flex-direction: column; gap: 6px;
-    }
-    .card-title {
-      font-family: 'Orbitron', sans-serif;
-      font-size: 13px; font-weight: 700;
-      color: #e8f4ff; letter-spacing: 0.05em;
-    }
-    .card-meta {
-      font-size: 10px; color: var(--dim);
-      display: flex; gap: 10px; align-items: center;
-    }
-    .tag {
-      padding: 2px 7px; border-radius: 3px;
-      font-size: 9px; font-family: 'Orbitron', sans-serif;
-      letter-spacing: 0.1em; font-weight: 700;
-    }
-    .tag-gba  { background: rgba(255,60,110,0.15);  color: var(--accent2); border: 1px solid rgba(255,60,110,0.3); }
-    .tag-nes  { background: rgba(255,229,0,0.12);   color: #ffe500;        border: 1px solid rgba(255,229,0,0.3); }
-    .tag-snes { background: rgba(168,85,247,0.15);  color: #c084fc;        border: 1px solid rgba(168,85,247,0.3); }
-    .tag-game { background: rgba(0,255,136,0.1);    color: #00ff88;        border: 1px solid rgba(0,255,136,0.25); }
+      .imgb_vis {
+        animation: imgb-animation 7s linear;
+      }
 
-    #noResults {
-      display: none;
-      grid-column: 1 / -1;
-      text-align: center;
-      padding: 48px 0;
-      color: var(--dim);
-      font-family: 'Orbitron', sans-serif;
-      font-size: 12px;
-      letter-spacing: 0.2em;
-    }
-    .add-card {
-      background: transparent;
-      border: 1px dashed var(--border);
-      border-radius: 6px;
-      display: flex; flex-direction: column;
-      align-items: center; justify-content: center;
-      gap: 10px; min-height: 196px;
-      opacity: 0.45; transition: opacity 0.2s, border-color 0.2s;
-    }
-    .add-card:hover { opacity: 0.7; border-color: var(--accent); }
-    .add-icon { font-size: 28px; color: var(--accent); }
-    .add-label { font-size: 10px; font-family: 'Orbitron', sans-serif; letter-spacing: 0.15em; color: var(--dim); }
-    footer {
-      margin-top: 60px; padding-top: 20px;
-      border-top: 1px solid var(--border);
-      font-size: 10px; color: var(--dim);
-      display: flex; justify-content: space-between;
-      flex-wrap: wrap; gap: 8px;
-    }
-  </style>
-</head>
-<body>
-<div class="wrap">
-  <header>
-    <div class="logo">GAME<span>.</span>HUB</div>
-    <div class="status">SYSTEM ONLINE</div>
-  </header>
+      @keyframes imgb-animation {
+        10% {
+          transform: translateX(0);
+        }
 
-  <div class="controls">
-    <div class="search-wrap">
-      <input type="text" id="searchInput" placeholder="Search games..." oninput="filterCards()" autocomplete="off" spellcheck="false"/>
+        20% {
+          transform: translateX(100px);
+        }
+
+        90% {
+          transform: translateX(100px);
+        }
+
+        100% {
+          transform: translateX(0);
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <div style="width: 100vw; height: 100vh; max-width: 100%">
+      <div id="game" style="display: none"></div>
+      <button id="startButton">PLAY</button>
     </div>
-    <div class="filter-row">
-      <span class="filter-label">FILTER:</span>
-      <button class="filter-btn active" data-tag="ALL"  onclick="setFilter('ALL')">ALL</button>
-      <button class="filter-btn"        data-tag="GBA"  onclick="setFilter('GBA')">GBA</button>
-      <button class="filter-btn"        data-tag="NES"  onclick="setFilter('NES')">NES</button>
-      <button class="filter-btn"        data-tag="SNES" onclick="setFilter('SNES')">SNES</button>
-      <button class="filter-btn"        data-tag="GAME" onclick="setFilter('GAME')">GAME</button>
-    </div>
-  </div>
-
-  <div class="section-label">LIBRARY</div>
-
-  <div class="grid" id="gameGrid">
-
-    <!-- ══════════════════════════════════════════════════════════
-         GAME CARDS — the JS will sort these alphabetically automatically.
-         To add a game, copy a card block and fill in:
-           data-title = exact game name (used for search & sort)
-           data-tag   = GBA | NES | SNES | GAME
-           onclick    = your GitHub raw URL to the game HTML
-           emoji, .card-title, .tag class, genre text
-    ══════════════════════════════════════════════════════════ -->
-
-    <div class="game-card" data-title="Pokemon Emerald" data-tag="GBA"
-         onclick="launchGame('https://raw.githubusercontent.com/II-SHADOW/HTML-Games/main/pokemonemerald.html')">
-      <div class="card-thumb">
-        🌿
-        <div class="play-overlay"><div class="play-icon"></div></div>
-      </div>
-      <div class="card-body">
-        <div class="card-title">Pokemon Emerald</div>
-        <div class="card-meta"><span class="tag tag-gba">GBA</span> RPG</div>
-      </div>
-    </div>
-
-    <div class="game-card" data-title="Stickman hook" data-tag="GBA"
-         onclick="launchGame('https://raw.githubusercontent.com/Gams-Offline/Gams/refs/heads/main/g/stickmanhook.html')">
-      <div class="card-thumb">
-        🌿
-        <div class="play-overlay"><div class="play-icon"></div></div>
-      </div>
-      <div class="card-body">
-        <div class="card-title">Stickman Hook</div>
-        <div class="card-meta"><span class="tag tag-game">GAME</span></div>
-      </div>
-    </div>
-
-    <div class="game-card" data-title="Helios Proxy" data-tag="GBA"
-         onclick="launchGame('https://raw.githubusercontent.com/II-SHADOW/HTML-Games/refs/heads/main/helios.html')">
-      <div class="card-thumb">
-        🌿
-        <div class="play-overlay"><div class="play-icon"></div></div>
-      </div>
-      <div class="card-body">
-        <div class="card-title">Helios Proxy</div>
-        <div class="card-meta"><span class="tag tag-game">GAME</span></div>
-      </div>
-    </div>
-
-    <!-- ══════════════════════════════════════════════════════════ -->
-
-    <div id="noResults">// NO GAMES FOUND</div>
-
-    <div class="add-card">
-      <div class="add-icon">＋</div>
-      <div class="add-label">MORE GAMES SOON</div>
-    </div>
-
-  </div>
-
-  <footer>
-    <span>GAME.HUB v1.0</span>
-    <span>// ADD MORE GAMES BY EDITING THE HTML</span>
-  </footer>
-</div>
-
-<script>
-  let activeFilter = 'ALL';
-
-  function setFilter(tag) {
-    activeFilter = tag;
-    document.querySelectorAll('.filter-btn').forEach(b => {
-      b.classList.toggle('active', b.dataset.tag === tag);
-    });
-    filterCards();
-  }
-
-  function filterCards() {
-    const query = document.getElementById('searchInput').value.toLowerCase().trim();
-    const cards = document.querySelectorAll('.game-card');
-    let visible = 0;
-    cards.forEach(card => {
-      const title = (card.dataset.title || '').toLowerCase();
-      const tag   = (card.dataset.tag  || '').toUpperCase();
-      const matchSearch = !query || title.includes(query);
-      const matchTag    = activeFilter === 'ALL' || tag === activeFilter;
-      const show = matchSearch && matchTag;
-      card.classList.toggle('hidden', !show);
-      if (show) visible++;
-    });
-    document.getElementById('noResults').style.display = visible === 0 ? 'block' : 'none';
-  }
-
-  // Sort all game cards alphabetically by data-title on load
-  (function sortCardsAlpha() {
-    const grid = document.getElementById('gameGrid');
-    const cards = Array.from(grid.querySelectorAll('.game-card'));
-    const noResults = grid.querySelector('#noResults');
-    cards.sort((a, b) => (a.dataset.title || '').localeCompare(b.dataset.title || ''));
-    cards.forEach(c => grid.insertBefore(c, noResults));
-  })();
-
-  // Fetch game HTML from GitHub raw and open in about:blank
-  function launchGame(rawUrl) {
-    fetch(rawUrl + '?t=' + Date.now())
-      .then(r => r.text())
-      .then(html => {
-        const win = window.open('about:blank', '_blank');
-        if (!win) { alert('Pop-up blocked! Please allow pop-ups.'); return; }
-        win.document.open();
-        win.document.write(html);
-        win.document.close();
-      })
-      .catch(() => alert('Could not load game. Check the URL.'));
-  }
-</script>
-</body>
+    <script>
+      document.getElementById("game").style.display = "none";
+      function startGame() {
+        document.getElementById("game").style.display = "block";
+        document.getElementById("startButton").style.display = "none";
+        EJS_player = "#game";
+        EJS_core = "gba";
+        EJS_color = "#000000";
+        EJS_startOnLoaded = true;
+        EJS_pathtodata = "https://cdn.jsdelivr.net/gh/genizy/emu@master/";
+        EJS_gameUrl =
+          "https://cdn.jsdelivr.net/gh/a456pur/seraph@81f551ca0aa8e3d6018d32d8ac5904ac9bc78f76/games/pokemonemerald/pokemonemerald.gba";
+        loadGame();
+      }
+      document
+        .getElementById("startButton")
+        .addEventListener("click", startGame);
+      function loadGame() {
+        var script = document.createElement("script");
+        script.src = "https://cdn.jsdelivr.net/gh/genizy/emu@master/loader.js";
+        document.body.appendChild(script);
+      }
+    </script>
+  </body>
 </html>
