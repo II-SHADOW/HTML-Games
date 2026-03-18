@@ -19,63 +19,125 @@
     }
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     body {
-      background: var(--bg); color: var(--text);
+      background: var(--bg);
+      color: var(--text);
       font-family: 'Share Tech Mono', monospace;
-      min-height: 100vh; overflow-x: hidden;
+      min-height: 100vh;
+      overflow-x: hidden;
     }
     body::before {
-      content: ''; position: fixed; inset: 0;
+      content: '';
+      position: fixed; inset: 0;
       background-image:
         linear-gradient(rgba(0,229,255,0.03) 1px, transparent 1px),
         linear-gradient(90deg, rgba(0,229,255,0.03) 1px, transparent 1px);
-      background-size: 40px 40px; pointer-events: none; z-index: 0;
+      background-size: 40px 40px;
+      pointer-events: none; z-index: 0;
     }
     body::after {
-      content: ''; position: fixed; inset: 0;
+      content: '';
+      position: fixed; inset: 0;
       background: repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0,0,0,0.08) 2px, rgba(0,0,0,0.08) 4px);
       pointer-events: none; z-index: 0;
     }
-    .wrap { position: relative; z-index: 1; max-width: 1100px; margin: 0 auto; padding: 40px 24px 80px; }
+    .wrap {
+      position: relative; z-index: 1;
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 40px 24px 80px;
+    }
     header {
-      display: flex; align-items: flex-end; justify-content: space-between;
-      margin-bottom: 32px; border-bottom: 1px solid var(--border);
-      padding-bottom: 24px; flex-wrap: wrap; gap: 12px;
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      margin-bottom: 32px;
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 24px;
+      flex-wrap: wrap; gap: 12px;
     }
     .logo {
-      font-family: 'Orbitron', sans-serif; font-weight: 900;
-      font-size: clamp(22px, 4vw, 36px); letter-spacing: 0.08em;
-      color: var(--accent); text-shadow: var(--glow); line-height: 1;
+      font-family: 'Orbitron', sans-serif;
+      font-weight: 900;
+      font-size: clamp(22px, 4vw, 36px);
+      letter-spacing: 0.08em;
+      color: var(--accent);
+      text-shadow: var(--glow);
+      line-height: 1;
     }
     .logo span { color: var(--accent2); text-shadow: 0 0 18px rgba(255,60,110,0.4); }
-    .status { font-size: 11px; color: var(--dim); display: flex; align-items: center; gap: 8px; }
+    .status {
+      font-size: 11px; color: var(--dim);
+      display: flex; align-items: center; gap: 8px;
+    }
     .status::before {
-      content: ''; display: inline-block; width: 7px; height: 7px;
-      background: #00ff88; border-radius: 50%; box-shadow: 0 0 6px #00ff88;
+      content: '';
+      display: inline-block;
+      width: 7px; height: 7px;
+      background: #00ff88; border-radius: 50%;
+      box-shadow: 0 0 6px #00ff88;
       animation: pulse 2s infinite;
     }
     @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.3} }
 
-    /* Controls */
-    .controls { display: flex; flex-direction: column; gap: 14px; margin-bottom: 28px; }
+    /* ── Search + Filters ── */
+    .controls {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      margin-bottom: 28px;
+    }
     .search-wrap { position: relative; }
     .search-wrap::before {
-      content: '⌕'; position: absolute; left: 14px; top: 50%;
-      transform: translateY(-50%); color: var(--dim); font-size: 18px; pointer-events: none;
+      content: '⌕';
+      position: absolute;
+      left: 14px; top: 50%;
+      transform: translateY(-50%);
+      color: var(--dim);
+      font-size: 18px;
+      pointer-events: none;
     }
     #searchInput {
-      width: 100%; background: var(--card); border: 1px solid var(--border);
-      border-radius: 6px; color: var(--text); font-family: 'Share Tech Mono', monospace;
-      font-size: 13px; padding: 11px 16px 11px 40px; outline: none;
+      width: 100%;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      color: var(--text);
+      font-family: 'Share Tech Mono', monospace;
+      font-size: 13px;
+      padding: 11px 16px 11px 40px;
+      outline: none;
       transition: border-color 0.2s, box-shadow 0.2s;
     }
     #searchInput::placeholder { color: var(--dim); }
-    #searchInput:focus { border-color: var(--accent); box-shadow: 0 0 12px rgba(0,229,255,0.1); }
-    .filter-row { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; }
-    .filter-label { font-family: 'Orbitron', sans-serif; font-size: 9px; letter-spacing: 0.2em; color: var(--dim); margin-right: 4px; }
+    #searchInput:focus {
+      border-color: var(--accent);
+      box-shadow: 0 0 12px rgba(0,229,255,0.1);
+    }
+    .filter-row {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+    .filter-label {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 9px;
+      letter-spacing: 0.2em;
+      color: var(--dim);
+      margin-right: 4px;
+    }
     .filter-btn {
-      background: var(--card); border: 1px solid var(--border); border-radius: 4px;
-      color: var(--dim); font-family: 'Orbitron', sans-serif; font-size: 9px;
-      letter-spacing: 0.12em; font-weight: 700; padding: 5px 12px; cursor: pointer; transition: all 0.15s;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      color: var(--dim);
+      font-family: 'Orbitron', sans-serif;
+      font-size: 9px;
+      letter-spacing: 0.12em;
+      font-weight: 700;
+      padding: 5px 12px;
+      cursor: pointer;
+      transition: all 0.15s;
     }
     .filter-btn:hover { border-color: var(--accent); color: var(--accent); }
     .filter-btn.active { border-color: transparent; }
@@ -85,78 +147,122 @@
     .filter-btn[data-tag="SNES"].active { background: #a855f7;        color: #fff; border-color: #a855f7; }
     .filter-btn[data-tag="GAME"].active { background: #00ff88;        color: #000; border-color: #00ff88; }
 
+    /* ── Section label ── */
     .section-label {
-      font-family: 'Orbitron', sans-serif; font-size: 11px; letter-spacing: 0.25em;
-      color: var(--dim); text-transform: uppercase; margin-bottom: 20px;
+      font-family: 'Orbitron', sans-serif;
+      font-size: 11px; letter-spacing: 0.25em;
+      color: var(--dim); text-transform: uppercase;
+      margin-bottom: 20px;
     }
     .section-label::before { content: '// '; color: var(--accent); }
 
-    /* Grid */
-    .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 18px; }
+    /* ── Grid ── */
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: 18px;
+    }
     .game-card {
-      background: var(--card); border: 1px solid var(--border); border-radius: 6px;
-      overflow: hidden; cursor: pointer;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      overflow: hidden;
+      cursor: pointer;
       transition: transform 0.2s, border-color 0.2s, box-shadow 0.2s;
-      position: relative; display: flex; flex-direction: column;
+      position: relative;
+      display: flex; flex-direction: column;
     }
     .game-card:hover {
-      transform: translateY(-4px); border-color: var(--accent);
+      transform: translateY(-4px);
+      border-color: var(--accent);
       box-shadow: 0 0 22px rgba(0,229,255,0.15), 0 8px 32px rgba(0,0,0,0.5);
     }
     .game-card:hover .card-thumb { opacity: 0.9; }
     .game-card:hover .play-overlay { opacity: 1; }
     .game-card.hidden { display: none; }
+
     .card-thumb {
-      height: 120px; display: flex; align-items: center; justify-content: center;
-      font-size: 42px; background: linear-gradient(135deg, #0a1520 0%, #0f1e2d 100%);
-      opacity: 0.75; transition: opacity 0.2s; position: relative;
-      font-family: 'Share Tech Mono', monospace; color: var(--accent);
-      letter-spacing: -0.02em; overflow: hidden; padding: 8px;
-      text-align: center; word-break: break-word;
+      height: 120px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 52px;
+      background: linear-gradient(135deg, #0a1520 0%, #0f1e2d 100%);
+      opacity: 0.75;
+      transition: opacity 0.2s;
+      position: relative;
     }
-    .card-thumb .thumb-emoji { font-size: 48px; }
     .play-overlay {
-      position: absolute; inset: 0; background: rgba(0,229,255,0.08);
+      position: absolute; inset: 0;
+      background: rgba(0,229,255,0.08);
       display: flex; align-items: center; justify-content: center;
       opacity: 0; transition: opacity 0.2s;
     }
     .play-icon {
-      width: 40px; height: 40px; border-radius: 50%; background: var(--accent);
+      width: 40px; height: 40px;
+      border-radius: 50%;
+      background: var(--accent);
       display: flex; align-items: center; justify-content: center;
       box-shadow: 0 0 20px rgba(0,229,255,0.6);
     }
     .play-icon::after {
-      content: ''; display: inline-block; border: 0px solid transparent;
-      border-left: 14px solid #000; border-top: 9px solid transparent;
-      border-bottom: 9px solid transparent; margin-left: 4px;
+      content: '';
+      display: inline-block;
+      border: 0px solid transparent;
+      border-left: 14px solid #000;
+      border-top: 9px solid transparent;
+      border-bottom: 9px solid transparent;
+      margin-left: 4px;
     }
-    .card-body { padding: 14px 16px; flex: 1; display: flex; flex-direction: column; gap: 6px; }
-    .card-title { font-family: 'Orbitron', sans-serif; font-size: 12px; font-weight: 700; color: #e8f4ff; letter-spacing: 0.04em; }
-    .card-meta { font-size: 10px; color: var(--dim); display: flex; gap: 10px; align-items: center; }
-    .tag { padding: 2px 7px; border-radius: 3px; font-size: 9px; font-family: 'Orbitron', sans-serif; letter-spacing: 0.1em; font-weight: 700; }
+    .card-body {
+      padding: 14px 16px; flex: 1;
+      display: flex; flex-direction: column; gap: 6px;
+    }
+    .card-title {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 13px; font-weight: 700;
+      color: #e8f4ff; letter-spacing: 0.05em;
+    }
+    .card-meta {
+      font-size: 10px; color: var(--dim);
+      display: flex; gap: 10px; align-items: center;
+    }
+    .tag {
+      padding: 2px 7px; border-radius: 3px;
+      font-size: 9px; font-family: 'Orbitron', sans-serif;
+      letter-spacing: 0.1em; font-weight: 700;
+    }
     .tag-gba  { background: rgba(255,60,110,0.15);  color: var(--accent2); border: 1px solid rgba(255,60,110,0.3); }
     .tag-nes  { background: rgba(255,229,0,0.12);   color: #ffe500;        border: 1px solid rgba(255,229,0,0.3); }
     .tag-snes { background: rgba(168,85,247,0.15);  color: #c084fc;        border: 1px solid rgba(168,85,247,0.3); }
     .tag-game { background: rgba(0,255,136,0.1);    color: #00ff88;        border: 1px solid rgba(0,255,136,0.25); }
 
-    /* Loading / status */
-    #statusMsg {
-      grid-column: 1 / -1; text-align: center; padding: 48px 0;
-      color: var(--dim); font-family: 'Orbitron', sans-serif;
-      font-size: 11px; letter-spacing: 0.2em;
+    #noResults {
+      display: none;
+      grid-column: 1 / -1;
+      text-align: center;
+      padding: 48px 0;
+      color: var(--dim);
+      font-family: 'Orbitron', sans-serif;
+      font-size: 12px;
+      letter-spacing: 0.2em;
     }
-    .spinner {
-      display: inline-block; width: 18px; height: 18px;
-      border: 2px solid var(--border); border-top-color: var(--accent);
-      border-radius: 50%; animation: spin 0.7s linear infinite;
-      vertical-align: middle; margin-right: 10px;
+    .add-card {
+      background: transparent;
+      border: 1px dashed var(--border);
+      border-radius: 6px;
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      gap: 10px; min-height: 196px;
+      opacity: 0.45; transition: opacity 0.2s, border-color 0.2s;
     }
-    @keyframes spin { to { transform: rotate(360deg); } }
-
+    .add-card:hover { opacity: 0.7; border-color: var(--accent); }
+    .add-icon { font-size: 28px; color: var(--accent); }
+    .add-label { font-size: 10px; font-family: 'Orbitron', sans-serif; letter-spacing: 0.15em; color: var(--dim); }
     footer {
-      margin-top: 60px; padding-top: 20px; border-top: 1px solid var(--border);
-      font-size: 10px; color: var(--dim); display: flex;
-      justify-content: space-between; flex-wrap: wrap; gap: 8px;
+      margin-top: 60px; padding-top: 20px;
+      border-top: 1px solid var(--border);
+      font-size: 10px; color: var(--dim);
+      display: flex; justify-content: space-between;
+      flex-wrap: wrap; gap: 8px;
     }
   </style>
 </head>
@@ -164,7 +270,7 @@
 <div class="wrap">
   <header>
     <div class="logo">GAME<span>.</span>HUB</div>
-    <div class="status" id="statusDot">LOADING...</div>
+    <div class="status">SYSTEM ONLINE</div>
   </header>
 
   <div class="controls">
@@ -182,161 +288,108 @@
   </div>
 
   <div class="section-label">LIBRARY</div>
+
   <div class="grid" id="gameGrid">
-    <div id="statusMsg"><span class="spinner"></span>FETCHING GAMES...</div>
+
+    <!-- ══════════════════════════════════════════════════════════
+         GAME CARDS — the JS will sort these alphabetically automatically.
+         To add a game, copy a card block and fill in:
+           data-title = exact game name (used for search & sort)
+           data-tag   = GBA | NES | SNES | GAME
+           onclick    = your GitHub raw URL to the game HTML
+           emoji, .card-title, .tag class, genre text
+    ══════════════════════════════════════════════════════════ -->
+
+    <div class="game-card" data-title="Pokemon Emerald" data-tag="GBA"
+         onclick="launchGame('https://raw.githubusercontent.com/II-SHADOW/HTML-Games/main/pokemonemerald.html')">
+      <div class="card-thumb">
+        🌿
+        <div class="play-overlay"><div class="play-icon"></div></div>
+      </div>
+      <div class="card-body">
+        <div class="card-title">Pokemon Emerald</div>
+        <div class="card-meta"><span class="tag tag-gba">GBA</span> RPG</div>
+      </div>
+    </div>
+
+    <div class="game-card" data-title="Stickman hook" data-tag="GBA"
+         onclick="launchGame('https://raw.githubusercontent.com/Gams-Offline/Gams/refs/heads/main/g/stickmanhook.html')">
+      <div class="card-thumb">
+        🌿
+        <div class="play-overlay"><div class="play-icon"></div></div>
+      </div>
+      <div class="card-body">
+        <div class="card-title">Stickman Hook</div>
+        <div class="card-meta"><span class="tag tag-game">GAME</span></div>
+      </div>
+    </div>
+
+    <div class="game-card" data-title="Helios Proxy" data-tag="GBA"
+         onclick="launchGame('https://raw.githubusercontent.com/II-SHADOW/HTML-Games/refs/heads/main/helios.html')">
+      <div class="card-thumb">
+        🌿
+        <div class="play-overlay"><div class="play-icon"></div></div>
+      </div>
+      <div class="card-body">
+        <div class="card-title">Helios Proxy</div>
+        <div class="card-meta"><span class="tag tag-game">GAME</span></div>
+      </div>
+    </div>
+
+    <!-- ══════════════════════════════════════════════════════════ -->
+
+    <div id="noResults">// NO GAMES FOUND</div>
+
+    <div class="add-card">
+      <div class="add-icon">＋</div>
+      <div class="add-label">MORE GAMES SOON</div>
+    </div>
+
   </div>
 
   <footer>
     <span>GAME.HUB v1.0</span>
-    <span id="gameCount">// LOADING</span>
+    <span>// ADD MORE GAMES BY EDITING THE HTML</span>
   </footer>
 </div>
 
 <script>
-  // ── CONFIG ──────────────────────────────────────────────────────────────────
-  // The repo to pull games from. Change these if you fork or add your own repo.
-  const REPOS = [
-    { owner: 'bubbls', repo: 'ugs-singlefile', path: '' },       // root
-    { owner: 'bubbls', repo: 'ugs-singlefile', path: 'UGS-Files' } // subfolder
-  ];
-
-  // Keyword → tag mapping. If a filename contains any of the keywords, it gets that tag.
-  // Priority order: GBA first, then NES, SNES, then default GAME.
-  const TAG_RULES = [
-    { tag: 'GBA',  keywords: ['gba','gameboy','game boy','pokemon','zelda gba','fire emblem','advance'] },
-    { tag: 'NES',  keywords: ['nes','nintendo','mario','donkey kong','metroid','nes)','(nes'] },
-    { tag: 'SNES', keywords: ['snes','super nintendo','super mario','super metroid','chrono','snes)','(snes'] },
-  ];
-
-  // Emojis cycled for variety on cards
-  const EMOJIS = ['🎮','👾','🕹️','⚔️','🌿','🔥','💎','🌟','🗡️','🏆','🎯','💣','🛸','🐉','🧩'];
-
-  // ── STATE ───────────────────────────────────────────────────────────────────
   let activeFilter = 'ALL';
-  let allCards = [];
 
-  // ── INIT ────────────────────────────────────────────────────────────────────
-  window.addEventListener('DOMContentLoaded', loadAllGames);
-
-  async function loadAllGames() {
-    const grid = document.getElementById('gameGrid');
-    const files = [];
-
-    for (const { owner, repo, path } of REPOS) {
-      try {
-        const url = `https://api.github.com/repos/${owner}/${repo}/contents/${path}`;
-        const res = await fetch(url);
-        if (!res.ok) continue;
-        const items = await res.json();
-        for (const item of items) {
-          if (item.type === 'file' && item.name.toLowerCase().endsWith('.html')) {
-            files.push({ name: item.name, rawUrl: item.download_url });
-          }
-        }
-      } catch (e) { /* skip failed repos silently */ }
-    }
-
-    if (files.length === 0) {
-      document.getElementById('statusMsg').textContent = '// NO GAMES FOUND — CHECK NETWORK OR REPO';
-      return;
-    }
-
-    // Sort alphabetically
-    files.sort((a, b) => cleanName(a.name).localeCompare(cleanName(b.name)));
-
-    // Build cards
-    grid.innerHTML = '';
-    files.forEach((f, i) => {
-      const title = cleanName(f.name);
-      const tag   = detectTag(f.name);
-      const emoji = EMOJIS[i % EMOJIS.length];
-      const card  = buildCard(title, tag, emoji, f.rawUrl);
-      grid.appendChild(card);
-      allCards.push(card);
-    });
-
-    // Add "more games" placeholder
-    const addCard = document.createElement('div');
-    addCard.className = 'add-card';
-    addCard.innerHTML = `<div style="font-size:28px;color:var(--accent)">＋</div><div style="font-size:10px;font-family:'Orbitron',sans-serif;letter-spacing:.15em;color:var(--dim)">MORE GAMES SOON</div>`;
-    grid.appendChild(addCard);
-
-    document.getElementById('statusDot').textContent = 'SYSTEM ONLINE';
-    document.getElementById('gameCount').textContent = `// ${files.length} GAMES LOADED`;
-
-    filterCards(); // apply any active filter
-  }
-
-  // ── HELPERS ─────────────────────────────────────────────────────────────────
-  function cleanName(filename) {
-    return filename
-      .replace(/\.html$/i, '')
-      .replace(/[-_]+/g, ' ')
-      .replace(/\s*\(\d+\)\s*$/, '') // strip trailing "(1)" duplicates
-      .trim();
-  }
-
-  function detectTag(filename) {
-    const lower = filename.toLowerCase();
-    for (const rule of TAG_RULES) {
-      if (rule.keywords.some(kw => lower.includes(kw))) return rule.tag;
-    }
-    return 'GAME';
-  }
-
-  function buildCard(title, tag, emoji, rawUrl) {
-    const tagClass = { GBA: 'tag-gba', NES: 'tag-nes', SNES: 'tag-snes', GAME: 'tag-game' }[tag] || 'tag-game';
-    const div = document.createElement('div');
-    div.className = 'game-card';
-    div.dataset.title = title;
-    div.dataset.tag   = tag;
-    div.innerHTML = `
-      <div class="card-thumb">
-        <span class="thumb-emoji">${emoji}</span>
-        <div class="play-overlay"><div class="play-icon"></div></div>
-      </div>
-      <div class="card-body">
-        <div class="card-title">${escHtml(title)}</div>
-        <div class="card-meta"><span class="tag ${tagClass}">${tag}</span></div>
-      </div>`;
-    div.addEventListener('click', () => launchGame(rawUrl));
-    return div;
-  }
-
-  function escHtml(str) {
-    return str.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
-  }
-
-  // ── FILTER ──────────────────────────────────────────────────────────────────
   function setFilter(tag) {
     activeFilter = tag;
-    document.querySelectorAll('.filter-btn').forEach(b => b.classList.toggle('active', b.dataset.tag === tag));
+    document.querySelectorAll('.filter-btn').forEach(b => {
+      b.classList.toggle('active', b.dataset.tag === tag);
+    });
     filterCards();
   }
 
   function filterCards() {
     const query = document.getElementById('searchInput').value.toLowerCase().trim();
+    const cards = document.querySelectorAll('.game-card');
     let visible = 0;
-    allCards.forEach(card => {
+    cards.forEach(card => {
       const title = (card.dataset.title || '').toLowerCase();
       const tag   = (card.dataset.tag  || '').toUpperCase();
-      const show  = (!query || title.includes(query)) && (activeFilter === 'ALL' || tag === activeFilter);
+      const matchSearch = !query || title.includes(query);
+      const matchTag    = activeFilter === 'ALL' || tag === activeFilter;
+      const show = matchSearch && matchTag;
       card.classList.toggle('hidden', !show);
       if (show) visible++;
     });
-    // Show/hide no-results message
-    let noRes = document.getElementById('noResults');
-    if (!noRes) {
-      noRes = document.createElement('div');
-      noRes.id = 'noResults';
-      noRes.style.cssText = 'display:none;grid-column:1/-1;text-align:center;padding:48px 0;color:var(--dim);font-family:Orbitron,sans-serif;font-size:12px;letter-spacing:.2em';
-      noRes.textContent = '// NO GAMES FOUND';
-      document.getElementById('gameGrid').prepend(noRes);
-    }
-    noRes.style.display = visible === 0 ? 'block' : 'none';
+    document.getElementById('noResults').style.display = visible === 0 ? 'block' : 'none';
   }
 
-  // ── LAUNCHER ────────────────────────────────────────────────────────────────
+  // Sort all game cards alphabetically by data-title on load
+  (function sortCardsAlpha() {
+    const grid = document.getElementById('gameGrid');
+    const cards = Array.from(grid.querySelectorAll('.game-card'));
+    const noResults = grid.querySelector('#noResults');
+    cards.sort((a, b) => (a.dataset.title || '').localeCompare(b.dataset.title || ''));
+    cards.forEach(c => grid.insertBefore(c, noResults));
+  })();
+
+  // Fetch game HTML from GitHub raw and open in about:blank
   function launchGame(rawUrl) {
     fetch(rawUrl + '?t=' + Date.now())
       .then(r => r.text())
