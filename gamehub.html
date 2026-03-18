@@ -301,7 +301,7 @@
     ══════════════════════════════════════════════════════════ -->
 
     <div class="game-card" data-title="Pokemon Emerald" data-tag="GBA"
-         onclick="launchGame('https://raw.githubusercontent.com/II-SHADOW/HTML-Games/main/pokemonemerald.html')">
+         onclick="launchGame('https://raw.githubusercontent.com/II-SHADOW/HTML-Games/refs/heads/main/pokemonemerald.html')">
       <div class="card-thumb">
         🌿
         <div class="play-overlay"><div class="play-icon"></div></div>
@@ -394,8 +394,7 @@
     fetch(rawUrl + '?t=' + Date.now())
       .then(r => r.text())
       .then(html => {
-        const win = window.open('about:blank', '_blank');
-        if (!win) { alert('Pop-up blocked! Please allow pop-ups.'); return; }
+        const win = window.open('about:blank', '_blank');        
         win.document.open();
         win.document.write(html);
         win.document.close();
